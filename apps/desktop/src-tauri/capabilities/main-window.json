@@ -1,0 +1,19 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-window",
+  "description": "Settings window: manage the app list, pairing and the focus guard. Local bundled content only.",
+  "windows": ["main"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "allow-get-state",
+    "allow-start-guard",
+    "allow-stop-guard",
+    "allow-add-rule",
+    "allow-remove-rule",
+    "allow-set-rule-close",
+    "allow-set-web-url",
+    "allow-get-pairing-secret",
+    "allow-reset-pairing"
+  ]
+}

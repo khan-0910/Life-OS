@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "overlay-window",
+  "description": "Interruption overlay: read the current interruption and choose an action. Nothing else.",
+  "windows": ["overlay"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "allow-get-interruption",
+    "allow-overlay-action"
+  ]
+}

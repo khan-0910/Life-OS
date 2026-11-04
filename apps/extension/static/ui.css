@@ -1,0 +1,41 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0c0e;
+  --panel: #121317;
+  --line: rgb(255 255 255 / 0.12);
+  --ink: #edebe5;
+  --ink-3: #8c8981;
+  --sage: #9fd4b8;
+  --amber: #e9bb6a;
+  --rose: #ee8f80;
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-size: 14px; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+.popup { width: 320px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.popup h1 { font-size: 15px; margin: 0; }
+.muted { color: var(--ink-3); margin: 0; }
+.small { font-size: 12px; }
+.label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-3); margin-top: 8px; }
+code { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; user-select: all; word-break: break-all; }
+.code { font-size: 22px; letter-spacing: 0.18em; text-align: center; font-family: "Cascadia Mono", ui-monospace, monospace; }
+.mono { font-size: 12px; font-family: "Cascadia Mono", ui-monospace, monospace; }
+#app { display: flex; flex-direction: column; gap: 8px; }
+.row { display: flex; gap: 8px; }
+button { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit; cursor: pointer; }
+button:hover { background: #1f2127; }
+button.primary { background: var(--sage); color: #0d1d15; border-color: transparent; font-weight: 600; }
+button.danger { color: var(--rose); border-color: rgb(238 143 128 / 0.35); align-self: flex-start; }
+button.ghost { background: transparent; }
+.status { margin: 0; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); }
+.status[data-state="on"] { border-color: rgb(159 212 184 / 0.4); color: var(--sage); }
+.status[data-state="warn"] { border-color: rgb(233 187 106 / 0.4); color: var(--amber); }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+footer { border-top: 1px solid var(--line); padding-top: 10px; }
+
+.blocked { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.blocked main { max-width: 480px; }
+.blocked h1 { font-size: 28px; line-height: 1.2; margin: 8px 0 12px; }
+.eyebrow { color: var(--amber); margin: 0; font-size: 13px; }

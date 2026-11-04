@@ -1,0 +1,23 @@
+{
+  "name": "lifeos",
+  "private": true,
+  "description": "LifeOS — a personal life planner with focus integrations.",
+  "workspaces": [
+    "packages/domain",
+    "apps/web",
+    "apps/extension",
+    "apps/desktop",
+    "supabase"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "npm run dev -w @lifeos/web",
+    "build": "npm run build -w @lifeos/web && npm run build -w @lifeos/extension",
+    "build:desktop-ui": "npm run build -w @lifeos/desktop",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  }
+}

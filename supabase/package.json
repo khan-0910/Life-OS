@@ -1,0 +1,15 @@
+{
+  "name": "@lifeos/supabase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Database migrations and Row Level Security tests (run against PGlite).",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.13",
+    "@types/node": "26.6.6",
+    "vitest": "5.0.5"
+  }
+}

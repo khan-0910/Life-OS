@@ -1,0 +1,494 @@
+@import "tailwindcss";
+
+/*
+ * LifeOS "risograph daybook" palette.
+ * Matcha-milk paper, warm ink, and a handful of print colors (tomato, sun, jade,
+ * mint, apricot; no blues or purples) — solid fills and offset shadows instead of glows and gradients.
+ * Deep accents are text-safe (≥ 4.5:1 on canvas/panel). Accent names are kept
+ * so components keep their meaning: sage = green, amber = ochre, rose = tomato,
+ * sky = raspberry, violet = jade (the "link/focus" accent), lavender = oat,
+ * powder = apricot cream, sticky-blue = apricot.
+ */
+@theme {
+  --color-canvas: #e2e8cf;
+  --color-panel: #f5f7ea;
+  --color-raised: #d5ddbd;
+  --color-hover: #ccd5b2;
+  --color-line: rgb(29 26 22 / 0.1);
+  --color-line-strong: rgb(29 26 22 / 0.18);
+  --color-ink: #1d1a16;
+  --color-ink-2: #4a443b;
+  --color-ink-3: #5e574c;
+
+  /* Deep accents: text, icons, strokes */
+  --color-sage: #176a42;
+  --color-sage-ink: #ffffff;
+  --color-amber: #8a5a00;
+  --color-rose: #a92f15;
+  --color-sky: #9a3d5c;
+  --color-violet: #0f6b5c;
+
+  /* Pastel fills */
+  --color-mint: #cfe8d5;
+  --color-butter: #f9e3a1;
+  --color-peach: #f8cdb4;
+  --color-blush: #f6c9c0;
+  --color-lavender: #efe3cc;
+  --color-powder: #f6dcc6;
+  --color-cream: #f7ead3;
+
+  /* Board palette: saturated sticky notes + a night ink for high-contrast bands */
+  --color-sticky-yellow: #ffc83d;
+  --color-sticky-pink: #ff8fa3;
+  --color-sticky-blue: #ffb38a;
+  --color-sticky-green: #7fd8a4;
+  --color-sticky-orange: #ff8a4c;
+  --color-sticky-lime: #c4e06b;
+  --color-tomato: #ff5a36;
+  --color-night: #12301f;
+  --color-night-2: #1a4230;
+  --color-electric: #0f6b5c;
+  /* Text-safe tomato (≥ 4.5:1 on paper). */
+  --color-hot: #b8320f;
+
+  /* Self-hosted by next/font at build time (no runtime third-party requests); system fallbacks. */
+  --font-sans: var(--font-bricolage), "Segoe UI Variable Text", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-hand: var(--font-caveat), "Segoe Print", "Comic Sans MS", cursive;
+  --font-mono: "Cascadia Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Motion tokens — keep in sync with lib/motion.ts (see docs/MOTION.md). */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-dialog-in: dialog-in 320ms var(--ease-spring);
+  --animate-dialog-out: dialog-out 160ms var(--ease-soft) forwards;
+  --animate-fade-up: fade-up 220ms var(--ease-soft) both;
+
+  @keyframes dialog-in {
+    from { opacity: 0; transform: translateY(18px) scale(0.95) rotate(-0.6deg); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes dialog-out {
+    to { opacity: 0; transform: translateY(10px) scale(0.97); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+:root {
+  --dur-micro: 140ms;
+  --dur-ui: 220ms;
+  --dur-panel: 320ms;
+  --dur-ritual: 560ms;
+  --shadow-soft: 0 1px 0 rgb(29 26 22 / 0.08), 0 6px 18px -12px rgb(29 26 22 / 0.25);
+  --shadow-lift: 4px 4px 0 0 #1d1a16;
+  --dayline: linear-gradient(90deg, #ff5a36, #ff8a4c 25%, #ffc83d 50%, #7fd8a4 75%, #0f6b5c);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- keyframes ---------- */
+@keyframes backdrop-in { from { opacity: 0; } }
+@keyframes backdrop-out { to { opacity: 0; } }
+@keyframes breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+/* Ambient color fields: slow, varied, transform-only. */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(6vw, 4vh, 0) scale(1.08); }
+  66% { transform: translate3d(-3vw, 7vh, 0) scale(0.96); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-7vw, -5vh, 0) scale(0.92); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(4vw, -6vh, 0) rotate(25deg); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes sheen {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to { transform: translateX(220%) skewX(-18deg); }
+}
+@keyframes dash-flow { to { stroke-dashoffset: -200; } }
+@keyframes shimmer-text { to { background-position: 200% center; } }
+
+/* ---------- base ---------- */
+html {
+  color-scheme: light;
+  background: var(--color-canvas);
+}
+
+body {
+  min-height: 100dvh;
+  background:
+    radial-gradient(rgb(29 26 22 / 0.09) 1px, transparent 1.4px) 0 0 / 22px 22px,
+    var(--color-canvas);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Decorative layers may extend past the edge; never let them create sideways scroll. */
+  overflow-x: clip;
+}
+
+/* Paper grain over everything (static, never intercepts input). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+
+/* Display type: Fraunces with its soft, wonky axes turned up. */
+h1, h2, h3, .font-display-soft {
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.font-hand { font-family: var(--font-hand); }
+
+::selection {
+  background: #ffc83d;
+  color: #1d1a16;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--color-violet);
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  color-scheme: light;
+}
+
+dialog::backdrop {
+  background: rgb(29 26 22 / 0.35);
+  animation: backdrop-in var(--dur-ui) var(--ease-soft);
+}
+dialog[open] { animation: var(--animate-dialog-in); }
+dialog[data-closing] { animation: var(--animate-dialog-out); }
+dialog[data-closing]::backdrop { animation: backdrop-out 160ms var(--ease-soft) forwards; }
+
+/* ---------- Dayline: the product-wide "now" motif ---------- */
+.dayline-head {
+  background: #fff;
+  box-shadow: 0 0 0 3px #1d1a16, 0 0 0 6px rgb(255 200 61 / 0.6);
+}
+.dayline-fill {
+  background: var(--dayline);
+}
+.dayline-rule {
+  background: linear-gradient(90deg, #ff5a36, #ff8a4c 40%, rgb(255 138 76 / 0.15) 80%, transparent);
+}
+.dayline-shimmer {
+  background-image: var(--dayline);
+  background-size: 200% 100%;
+  animation: gradient-pan 6s linear infinite;
+}
+
+/* Accent words: solid print color in wonky italic (no gradient text). */
+.ink-gradient {
+  color: var(--color-hot);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+/* ---------- Surfaces ---------- */
+.glass {
+  background: var(--color-canvas);
+}
+
+/* Lift + light sheen on hover and keyboard focus (touch: on press via :active). */
+.lift {
+  position: relative;
+  transition: transform 260ms var(--ease-spring), box-shadow 260ms var(--ease-soft);
+  box-shadow: var(--shadow-soft);
+}
+.lift:hover,
+.lift:focus-within {
+  transform: translate(-3px, -3px) rotate(-0.4deg);
+  box-shadow: var(--shadow-lift);
+}
+.lift:active {
+  transform: translate(-1px, -1px);
+  box-shadow: 1px 1px 0 0 #1d1a16;
+}
+.lift::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(105deg, transparent 40%, rgb(255 200 61 / 0.25) 50%, transparent 60%) no-repeat;
+  background-size: 250% 100%;
+  background-position: 120% 0;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.lift:hover::after,
+.lift:focus-within::after {
+  opacity: 1;
+  animation: card-sheen 900ms var(--ease-soft) forwards;
+}
+@keyframes card-sheen {
+  from { background-position: 120% 0; }
+  to { background-position: -40% 0; }
+}
+
+/* ---------- Ambient field (app shell + landing) ---------- */
+.ambient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.drift-a { animation: drift-a 38s ease-in-out infinite; }
+.drift-b { animation: drift-b 46s ease-in-out infinite; }
+.drift-c { animation: drift-c 54s ease-in-out infinite; }
+.float-y { animation: float-y 7s ease-in-out infinite; }
+.spin-slow { animation: spin-slow 40s linear infinite; }
+.dash-flow { stroke-dasharray: 6 10; animation: dash-flow 6s linear infinite; }
+.glint { animation: sheen 3.6s var(--ease-soft) infinite; }
+/* Pause ambient loops when the page is hidden (set by the shell / landing). */
+html[data-hidden] .drift-a,
+html[data-hidden] .drift-b,
+html[data-hidden] .drift-c,
+html[data-hidden] .float-y,
+html[data-hidden] .spin-slow,
+html[data-hidden] .dash-flow,
+html[data-hidden] .glint,
+html[data-hidden] .ambient-breathe,
+html[data-hidden] .dayline-shimmer,
+html[data-hidden] .ink-gradient {
+  animation-play-state: paused;
+}
+
+/* ---------- Focus mode: the planner recedes, stays usable ---------- */
+.recede {
+  transition: opacity var(--dur-ritual) var(--ease-soft), filter var(--dur-ritual) var(--ease-soft);
+}
+html[data-focus-mode] .recede:not(:hover, :focus-within) {
+  opacity: 0.62;
+  filter: saturate(0.6);
+}
+.ambient-breathe {
+  animation: breathe 9s ease-in-out infinite;
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(29 26 22 / 0.18) transparent;
+}
+
+/* ---------- Reduced motion: complete, calm, nothing hidden ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ambient-breathe,
+  .drift-a,
+  .drift-b,
+  .drift-c,
+  .float-y,
+  .spin-slow,
+  .dash-flow,
+  .glint,
+  .dayline-shimmer,
+  .ink-gradient {
+    animation: none !important;
+  }
+  .lift:hover,
+  .lift:focus-within,
+  .lift:active {
+    transform: none;
+  }
+  .lift::after { display: none; }
+}
+
+/* Guides the eye toward the next action without looping attention-seeking motion. */
+@keyframes nudge-x {
+  0%, 70%, 100% { transform: translateX(0); }
+  80% { transform: translateX(4px); }
+  90% { transform: translateX(1px); }
+}
+.nudge-x { animation: nudge-x 4.5s var(--ease-soft) infinite; }
+html[data-hidden] .nudge-x { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .nudge-x { animation: none !important; }
+}
+
+/* ==========================================================================
+   Board layer: dotted canvas, sticky notes, aurora, marquee, spotlight cards.
+   All loops pause when hidden and are removed under reduced motion.
+   ========================================================================== */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgb(29 26 22 / 0.2) 1.2px, transparent 1.6px);
+  background-size: 24px 24px;
+}
+.dot-grid-night {
+  background-image: radial-gradient(rgb(255 255 255 / 0.13) 1.2px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+
+.sticky {
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04), 0 14px 28px -12px rgb(42 32 54 / 0.45), inset 0 -18px 30px -24px rgb(0 0 0 / 0.25);
+}
+.sticky::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 46px;
+  height: 18px;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.75);
+  border-radius: 3px;
+}
+
+@keyframes aurora-spin { to { --angle: 360deg; } }
+.aurora {
+  /* Slow-turning sunburst rays, like a print poster. */
+  background: repeating-conic-gradient(from var(--angle) at 50% 50%, rgb(255 200 61 / 0.5) 0deg 7deg, transparent 7deg 20deg);
+  animation: aurora-spin 60s linear infinite;
+}
+/* Print frame: ink border + hard offset shadow. */
+.ring-glow {
+  position: relative;
+  padding: 2.5px;
+  background: #1d1a16;
+  box-shadow: 10px 10px 0 0 #ff5a36;
+}
+
+@keyframes marquee-x { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee-x 38s linear infinite; }
+.marquee-track.reverse { animation-direction: reverse; }
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Pointer-following spotlight: JS sets --mx/--my on the element. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, -40%), rgb(255 200 61 / 0.32), transparent 62%);
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+.spotlight:hover::before,
+.spotlight:focus-within::before { opacity: 1; }
+
+@keyframes wobble {
+  0%, 100% { rotate: var(--r, -2deg); }
+  50% { rotate: calc(var(--r, -2deg) * -1); }
+}
+.wobble { animation: wobble 5s ease-in-out infinite; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.pulse-ring { animation: pulse-ring 2.2s var(--ease-soft) infinite; }
+
+/* Accent words (no gradient text): sun on dark bands, tomato on paper. */
+.vivid-text {
+  color: var(--color-sticky-yellow);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.hot-text {
+  color: var(--color-hot);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+html[data-hidden] .aurora,
+html[data-hidden] .ring-glow,
+html[data-hidden] .marquee-track,
+html[data-hidden] .wobble,
+html[data-hidden] .pulse-ring,
+html[data-hidden] .vivid-text,
+html[data-hidden] .hot-text {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .ring-glow,
+  .marquee-track,
+  .wobble,
+  .vivid-text,
+  .hot-text {
+    animation: none !important;
+  }
+  .pulse-ring { display: none; }
+}
+
+/* Variable-font weight wave: letters breathe between light and black. */
+@keyframes wght-wave {
+  0%, 100% { font-variation-settings: "wght" 900, "SOFT" 100, "WONK" 1; }
+  50% { font-variation-settings: "wght" 300, "SOFT" 0, "WONK" 0; }
+}
+.wght-wave { animation: wght-wave 3.2s ease-in-out infinite; }
+
+/* Scroll-linked reveal for any block (progressive enhancement; static where unsupported). */
+@supports (animation-timeline: view()) {
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(60px) rotate(-1.5deg) scale(0.96); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+  .scroll-rise {
+    animation: rise-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+}
+
+html[data-hidden] .wght-wave { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .wght-wave,
+  .scroll-rise {
+    animation: none !important;
+  }
+}
