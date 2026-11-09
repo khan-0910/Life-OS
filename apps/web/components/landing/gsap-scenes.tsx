@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import Shuffle from "../bits/Shuffle";
 import { Draggable, MOTION_OK, ScrollTrigger, SplitText, gsap, useGSAP } from "./gsap";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -115,7 +116,7 @@ export function DayClock() {
         ))}
         <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_1fr]">
           <div>
-            <p className="font-hand text-[26px] font-bold">scroll the day →</p>
+            <Shuffle text="scroll the day →" tag="p" className="font-hand text-[26px] font-bold" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
             <SplitHeading id="dayclock-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] sm:text-[64px]">
               One day, <em>hour by hour.</em>
             </SplitHeading>
@@ -191,7 +192,7 @@ export function HabitGarden() {
   return (
     <section ref={root} aria-labelledby="garden-title" className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8">
       <div className="max-w-2xl">
-        <p className="font-hand text-[26px] font-bold text-hot">habits that grow</p>
+        <Shuffle text="habits that grow" tag="p" className="font-hand text-[26px] font-bold text-hot" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
         <SplitHeading id="garden-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] text-ink sm:text-[60px]">
           Check in. Watch it bloom.
         </SplitHeading>
@@ -358,7 +359,7 @@ export function StickerDesk() {
     <section ref={root} aria-labelledby="desk-title" className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-xl">
-          <p className="font-hand text-[26px] font-bold text-hot">go on, throw them</p>
+          <Shuffle text="go on, throw them" tag="p" className="font-hand text-[26px] font-bold text-hot" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
           <SplitHeading id="desk-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] text-ink sm:text-[60px]">
             A messy desk is allowed.
           </SplitHeading>

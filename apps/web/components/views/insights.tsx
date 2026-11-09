@@ -7,6 +7,7 @@ import { formatDateShort, formatWeekday, pct } from "@/lib/format";
 import { useToday } from "@/lib/hooks";
 import { useData } from "@/lib/store";
 import { AnimatedNumber, Card, EmptyState, PageHeader, ProgressBar, Segmented } from "../ui";
+import Counter from "@/components/bits/Counter";
 
 type Range = "7" | "30";
 
@@ -102,15 +103,18 @@ export function InsightsView() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          ["Focus time", totals.activeMinutes ? `${Math.floor(totals.activeMinutes / 60)}h ${totals.activeMinutes % 60}m` : "0m"],
-          ["Sessions", `${totals.sessions}`, totals.sessions ? `${totals.completed} completed` : undefined],
-          ["Tasks completed", `${completedTotal}`],
-          ["Planned → done", pvd.planned ? pct(pvd.done / pvd.planned) : "—", pvd.planned ? `${pvd.done} of ${pvd.planned}` : "nothing planned"],
-        ].map(([label, value, hint]) => (
+          { label: "Focus time", text: totals.activeMinutes ? `${Math.floor(totals.activeMinutes / 60)}h ${totals.activeMinutes % 60}m` : "0m" },
+          { label: "Sessions", num: totals.sessions, hint: totals.sessions ? `${totals.completed} completed` : undefined },
+          { label: "Tasks completed", num: completedTotal },
+          pvd.planned
+            ? { label: "Planned → done", num: Math.round((pvd.done / pvd.planned) * 100), suffix: "%", hint: `${pvd.done} of ${pvd.planned}` }
+            : { label: "Planned → done", text: "—", hint: "nothing planned" },
+        ].map(({ label, text, num, suffix, hint }) => (
           <Card key={label} className="p-4">
             <div className="text-xs text-ink-3">{label}</div>
-            <div className="mt-1 text-2xl font-semibold tracking-tight tabular">
-              <AnimatedNumber value={value!} />
+            <div className="mt-1 font-[family-name:var(--font-display)] text-[28px] font-black tracking-tight tabular">
+              {/* Whole numbers roll like an odometer (React Bits Counter); mixed text keeps the slide-in. */}
+              {num !== undefined ? <Counter value={num} suffix={suffix} fontSize="1em" fontWeight={900} textColor="#1d1a16" stagger={0.04} /> : <AnimatedNumber value={text ?? ""} />}
             </div>
             {hint ? <div className="text-xs text-ink-3">{hint}</div> : null}
           </Card>

@@ -12,6 +12,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { CalendarDays, Download, EyeOff, Globe, HardDrive, Monitor, Repeat, Target, Timer, ChartColumn } from "lucide-react";
 import { cx } from "../ui";
 import { EnterLink } from "./enter-link";
+import { ProximityLine } from "./bits-scenes";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -437,8 +438,8 @@ export function Story() {
           transition={{ type: "spring", stiffness: 90, damping: 18 }}
         >
           <div aria-hidden className="spin-slow absolute -top-40 -right-40 size-96 rounded-full border-[28px] border-sticky-yellow/60" />
-          <h2 id="final-title" className="relative font-[family-name:var(--font-display)] text-[40px] leading-tight font-black tracking-[-0.04em] text-ink sm:text-[64px]">
-            Your day is waiting.
+          <h2 id="final-title" className="relative font-[family-name:var(--font-display)] text-[40px] leading-tight tracking-[-0.04em] text-ink sm:text-[64px]">
+            <ProximityLine text="Your day is waiting." toColor="#fff7e0" />
           </h2>
           <div aria-hidden className="relative mx-auto mt-4 h-1.5 w-48 rounded-full bg-ink" />
           <p className="relative mx-auto mt-5 max-w-md text-[17px] font-semibold text-ink">Start with a blank page or explore a clearly labeled sample plan. You can remove the sample any time.</p>

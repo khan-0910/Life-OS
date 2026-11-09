@@ -1,5 +1,6 @@
 "use client";
 
+import Counter from "@/components/bits/Counter";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
@@ -112,8 +113,8 @@ export function TodayView() {
             Daily progress
           </h2>
           <div className="grid grid-cols-3 gap-3">
-            <Stat fxTarget="tasks" gradient={["#6fd0a2", "#ff8a4c"]} ring={taskRatio} label="Tasks" value={`${view.doneToday.length}/${taskTotal}`} hint="done today" bumpOn={view.doneToday.length} />
-            <Stat fxTarget="habits" gradient={["#ff8fa3", "#ffb38a"]} ring={habitRatio} label="Habits" value={`${view.habitsDone.length}/${view.habits.length}`} hint="due today" bumpOn={view.habitsDone.length} />
+            <Stat fxTarget="tasks" gradient={["#6fd0a2", "#ff8a4c"]} ring={taskRatio} label="Tasks" value={`${view.doneToday.length}/${taskTotal}`} count={[view.doneToday.length, taskTotal]} hint="done today" bumpOn={view.doneToday.length} />
+            <Stat fxTarget="habits" gradient={["#ff8fa3", "#ffb38a"]} ring={habitRatio} label="Habits" value={`${view.habitsDone.length}/${view.habits.length}`} count={[view.habitsDone.length, view.habits.length]} hint="due today" bumpOn={view.habitsDone.length} />
             <Stat fxTarget="focus" gradient={["#ff9a62", "#f2b75a"]} ring={null} label="Focus" value={view.focusMs ? formatDuration(view.focusMs) : "0 min"} hint="saved sessions" bumpOn={view.focusMs} />
           </div>
         </Card>
@@ -289,6 +290,7 @@ function Stat({
   hint,
   bumpOn,
   fxTarget,
+  count,
 }: {
   ring: number | null;
   gradient: [string, string];
@@ -298,6 +300,8 @@ function Stat({
   bumpOn: number;
   /** Completion trails fly to this ring. */
   fxTarget: string;
+  /** [done, total]: rolls "done" like an odometer instead of sliding the whole label. */
+  count?: [number, number];
 }) {
   // The ring and its figure answer a real increase with one small bump.
   const scope = useBump<HTMLDivElement>(bumpOn);
@@ -305,13 +309,13 @@ function Stat({
     <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
       <div ref={scope} data-fx-target={fxTarget} className="rounded-full">
         <ProgressRing value={ring} gradient={gradient} stroke={6} label={`${label}: ${value} ${hint}`} size={56}>
-          <span className="text-[11px] font-medium text-ink-2 tabular">{ring === null ? "" : <AnimatedNumber value={`${Math.round(ring * 100)}%`} />}</span>
+          <span className="text-[11px] font-medium text-ink-2 tabular">{ring === null ? "" : <Counter value={Math.round(ring * 100)} suffix="%" fontSize="1em" fontWeight={600} textColor="#4a443b" fade={0} />}</span>
         </ProgressRing>
       </div>
       <div>
         <div className="text-xs text-ink-3">{label}</div>
         <div className="text-lg leading-6 font-semibold tabular">
-          <AnimatedNumber value={value} />
+          {count ? <Counter value={count[0]} suffix={`/${count[1]}`} fontSize="1em" fontWeight={700} textColor="#1d1a16" fade={0} /> : <AnimatedNumber value={value} />}
         </div>
         <div className="text-[11px] text-ink-3">{hint}</div>
       </div>

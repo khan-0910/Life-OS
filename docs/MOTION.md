@@ -94,3 +94,21 @@ All animation runs inside `useGSAP` with `gsap.matchMedia("(prefers-reduced-moti
 - Page titles hop letter by letter on hover and draw a tomato scribble underline.
 - Landing: Lenis smooth scrolling (synced to GSAP's ticker; off under reduced motion) and a footer `LoopMarquee` that speeds up with scroll velocity and reverses on scroll-up.
 - Fixed: motion springs given 3 keyframes (settings toggle, studio SMART letters) threw at runtime; marquee stalled when played in reverse.
+
+## React Bits layer
+
+Vendored from [React Bits](https://www.reactbits.dev) (MIT + Commons Clause) into `apps/web/components/bits/`, TS + Tailwind variants.
+Edited only to satisfy this repo's `noUncheckedIndexedAccess` (non-null assertions) and type-only imports; three React Compiler lint rules are switched off for that folder in `eslint.config.mjs`.
+
+| Component | Where |
+|---|---|
+| ClickSpark | Root layout: ink/tomato/sun spark burst on every click |
+| DotGrid | Landing hero: springy ink dots that swell tomato near the cursor, shockwave on click |
+| SplitFlapText | Hero "Next up" departure board cycling an example day |
+| ScrollStack | "Four moves. Every day." daily-loop cards pin and pile on window scroll (Lenis drives it) |
+| Shuffle | Handwritten section eyebrows scramble in, and again on hover |
+| VariableProximity | Final CTA headline: Fraunces weight/softness/wonk rise near the cursor |
+| Counter | Odometer digits on Today stats and Insights totals |
+| HoldButton | Settings → Delete everything: type DELETE, then press and hold (mouse or Enter/Space) |
+
+All of them honour `prefers-reduced-motion`.

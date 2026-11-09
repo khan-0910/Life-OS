@@ -10,6 +10,7 @@ import { hasSampleData, removeSampleData } from "@/lib/seed";
 import { emptyData, migrate, replaceAll, useData, type LifeData } from "@/lib/store";
 import { toast } from "../toast";
 import { Badge, Button, Card, Field, Input, PageHeader, Segmented, Select, Switch, Textarea } from "../ui";
+import HoldButton from "@/components/bits/HoldButton";
 
 function Section({ id, title, description, children }: { id: string; title: string; description?: React.ReactNode; children: React.ReactNode }) {
   return (
@@ -456,17 +457,25 @@ function DataSection() {
         <p className="mt-1 text-xs text-ink-3">Removes every task, habit, goal, session, review, blocklist and pairing. This can&apos;t be undone. Unpair integrations first so they forget this browser too.</p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           <Input aria-label='Type "DELETE" to confirm' placeholder='Type "DELETE"' className="w-40" value={confirmText} onChange={(e) => setConfirmText(e.target.value)} />
-          <Button
-            variant="danger"
+          {/* React Bits HoldButton: after typing DELETE, press and hold (or hold Enter/Space) to erase. */}
+          <HoldButton
+            size="sm"
+            holdTime={1600}
+            backgroundColor="#a92f15"
+            fillColor="#1d1a16"
+            textColor="#ffffff"
+            fillTextColor="#ffc83d"
             disabled={confirmText !== "DELETE"}
-            onClick={() => {
+            doneLabel="Deleted"
+            resetAfter={1800}
+            onHold={() => {
               replaceAll(emptyData());
               setConfirmText("");
               toast("All data deleted");
             }}
           >
-            Delete everything
-          </Button>
+            Hold to delete everything
+          </HoldButton>
         </div>
       </div>
     </Section>

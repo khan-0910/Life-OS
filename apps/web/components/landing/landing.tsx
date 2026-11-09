@@ -10,6 +10,7 @@ import { CursorGlow, NightTemplates, ScrollProgress, TemplateMarquee, Whiteboard
 import { GiantWordmark, Magnetic, Manifesto, OdometerStrip, PlayLetters, RollingBadge, RollingTrack, Scribble } from "./extras";
 import { DayClock, HabitGarden, LoopMarquee, StickerDesk } from "./gsap-scenes";
 import { SmoothScroll } from "./smooth-scroll";
+import { HeroDots, LoopStack, TodayBoard } from "./bits-scenes";
 import { HeroPreview } from "./hero-preview";
 import { Story } from "./story";
 
@@ -68,38 +69,6 @@ function RotatingPhrase() {
   );
 }
 
-function FloatingShapes() {
-  const reduce = useReducedMotion() ?? false;
-  const { scrollY } = useScroll();
-  const slow = useTransform(scrollY, [0, 800], [0, -120]);
-  const fast = useTransform(scrollY, [0, 800], [0, -260]);
-  const rev = useTransform(scrollY, [0, 800], [0, 140]);
-  const s = (v: typeof slow) => (reduce ? undefined : { y: v });
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <motion.div className="absolute top-[14%] left-[4%] hidden sm:block" style={s(slow)}>
-        <svg width="120" height="120" viewBox="0 0 120 120" className="spin-slow">
-          <circle cx="60" cy="60" r="48" fill="none" stroke="#ffb38a" strokeWidth="2" className="dash-flow" />
-        </svg>
-      </motion.div>
-      <motion.div className="absolute top-[62%] left-[44%]" style={s(fast)}>
-        <div className="float-y size-10 rotate-12 rounded-xl bg-butter shadow-sm" style={{ animationDelay: "-2s" }} />
-      </motion.div>
-      <motion.div className="absolute top-[8%] right-[38%]" style={s(rev)}>
-        <div className="float-y size-6 rounded-full bg-blush" style={{ animationDelay: "-4s" }} />
-      </motion.div>
-      <motion.div className="absolute bottom-[8%] left-[12%]" style={s(fast)}>
-        <svg width="34" height="34" viewBox="0 0 24 24" className="float-y text-[#ff8fa3]" style={{ animationDelay: "-1s" }}>
-          <path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="currentColor" />
-        </svg>
-      </motion.div>
-      <motion.div className="absolute top-[30%] right-[2%] hidden sm:block" style={s(slow)}>
-        <div className="float-y h-16 w-24 rounded-2xl border-2 border-dashed border-[#ff8a4c]/70" style={{ animationDelay: "-3s" }} />
-      </motion.div>
-    </div>
-  );
-}
-
 export function Landing() {
   const returning = useReturning();
   const { scrollY } = useScroll();
@@ -146,7 +115,7 @@ export function Landing() {
 
       <main id="main">
         <section aria-labelledby="hero-title" className="relative overflow-hidden">
-          <FloatingShapes />
+          <HeroDots />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pt-14 pb-20 sm:px-8 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:pb-28">
             <div>
               <motion.p
@@ -189,6 +158,7 @@ export function Landing() {
                   </motion.li>
                 ))}
               </motion.ul>
+              <TodayBoard />
             </div>
             <div className="relative">
               <RollingBadge className="absolute -top-14 -left-10 z-20 hidden lg:block" />
@@ -199,6 +169,7 @@ export function Landing() {
 
         <TemplateMarquee />
         <Manifesto />
+        <LoopStack />
         <Whiteboard />
         <RollingTrack />
         <DayClock />
