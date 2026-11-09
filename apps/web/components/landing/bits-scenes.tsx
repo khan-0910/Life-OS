@@ -7,11 +7,11 @@ import ScrollStack, { ScrollStackItem } from "../bits/ScrollStack";
 import SplitFlapText from "../bits/SplitFlapText";
 import VariableProximity from "../bits/VariableProximity";
 
-/** Springy ink dot field behind the hero: dots swell tomato under the cursor and shock outward on click. */
+/** Springy ink dot field behind the hero: dots swell under the cursor and shock outward on click (no color shift). */
 export function HeroDots() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_80%)]">
-      <DotGrid dotSize={4} gap={22} baseColor="#1d1a16" activeColor="#ff5a36" proximity={130} opacity={0.22} glow={0.2} shockStrength={4} />
+      <DotGrid dotSize={4} gap={22} baseColor="#1d1a16" activeColor="#1d1a16" proximity={130} opacity={0.22} glow={0.2} shockStrength={4} />
     </div>
   );
 }

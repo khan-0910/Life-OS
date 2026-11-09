@@ -6,7 +6,7 @@ import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, use
 import { HardDrive, Sparkles, WifiOff } from "lucide-react";
 import { AmbientField } from "../ambient";
 import { EnterLink, useReturning } from "./enter-link";
-import { CursorGlow, NightTemplates, ScrollProgress, TemplateMarquee, Whiteboard } from "./board";
+import { NightTemplates, ScrollProgress, TemplateMarquee, Whiteboard } from "./board";
 import { GiantWordmark, Magnetic, Manifesto, OdometerStrip, PlayLetters, RollingBadge, RollingTrack, Scribble } from "./extras";
 import { DayClock, HabitGarden, LoopMarquee, StickerDesk } from "./gsap-scenes";
 import { SmoothScroll } from "./smooth-scroll";
@@ -79,7 +79,6 @@ export function Landing() {
       <SmoothScroll />
       <AmbientField mood="landing" />
       <ScrollProgress />
-      <CursorGlow />
       <a href="#main" className="sr-only z-50 rounded-lg bg-ink px-3 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
         Skip to content
       </a>

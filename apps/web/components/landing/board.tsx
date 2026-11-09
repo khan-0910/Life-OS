@@ -33,30 +33,6 @@ export function ScrollProgress() {
   return <motion.div aria-hidden className="dayline-fill fixed inset-x-0 top-0 z-50 h-1 origin-left" style={{ scaleX }} />;
 }
 
-export function CursorGlow() {
-  const reduce = useReducedMotion() ?? false;
-  const x = useMotionValue(-600);
-  const y = useMotionValue(-600);
-  const sx = useSpring(x, { stiffness: 90, damping: 20, mass: 0.6 });
-  const sy = useSpring(y, { stiffness: 90, damping: 20, mass: 0.6 });
-  useEffect(() => {
-    const move = (e: PointerEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
-    };
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => window.removeEventListener("pointermove", move);
-  }, [x, y]);
-  if (reduce) return null;
-  return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[1] hidden size-[520px] rounded-full mix-blend-multiply [@media(pointer:fine)]:block"
-      style={{ x: sx, y: sy, translateX: "-50%", translateY: "-50%", background: "radial-gradient(circle, rgb(255 216 77 / 0.35), rgb(255 158 199 / 0.18) 40%, transparent 68%)" }}
-    />
-  );
-}
-
 /** Sets --mx/--my for the .spotlight hover glow. */
 function spot(e: ReactPointerEvent<HTMLElement>) {
   const r = e.currentTarget.getBoundingClientRect();
