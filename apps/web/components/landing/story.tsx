@@ -26,7 +26,7 @@ function Chapter({ id, eyebrow, icon, title, body, children, flip, tone }: { id:
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease: EASE }}
       >
-        <p className={cx("inline-flex items-center gap-2 rounded-full px-3 py-1 text-[12px] font-semibold tracking-wide uppercase", tone)}>
+        <p className={cx("inline-flex items-center gap-2 rounded-full px-3 py-1 text-[12px] font-semibold", tone)}>
           {icon} {eyebrow}
         </p>
         <h2 id={`${id}-title`} className="mt-4 font-[family-name:var(--font-display)] text-[34px] leading-[1.08] font-black tracking-[-0.04em] text-ink sm:text-[44px]">
@@ -241,11 +241,11 @@ function FocusBand() {
         <div aria-hidden className="ambient-breathe absolute -top-24 left-1/3 size-[420px] rounded-full bg-[radial-gradient(circle,#ff8fa3,transparent_65%)] opacity-50" />
         <div className="relative grid items-center gap-12 md:grid-cols-2">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[12px] font-semibold tracking-wide text-violet uppercase">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[12px] font-semibold text-violet">
               <Timer size={13} /> Focus
             </p>
             <h2 id="focus-title" className="mt-4 font-[family-name:var(--font-display)] text-[36px] leading-[1.06] font-black tracking-[-0.04em] text-ink sm:text-[48px]">
-              Step into a quieter room.
+              Step into a quieter room
             </h2>
             <p className="mt-4 max-w-md text-[16px] leading-relaxed text-ink-2">
               Start a session and the planner recedes. The timer keeps exact time from saved timestamps, so a sleeping tab or a refresh never loses your place. One button always stops everything.
@@ -275,7 +275,7 @@ function FocusBand() {
               <span className="dayline-head absolute top-0 left-1/2 size-3.5 -translate-x-1/2 rounded-full" />
             </div>
             <div className="relative text-center">
-              <p className="text-[12px] font-semibold tracking-wide text-violet uppercase">Focus · example</p>
+              <p className="text-[12px] font-semibold text-violet">Focus · example</p>
               <p className="font-mono text-5xl font-medium text-ink tabular">18:24</p>
               <p className="mt-1 text-[12px] text-ink-3">ends 10:42 AM</p>
             </div>
@@ -344,7 +344,7 @@ function PrivacyCards() {
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 0.6, ease: EASE }}
       >
-        Private by default.
+        Private by default
       </motion.h2>
       <div className="mt-10 grid gap-5 [perspective:1200px] md:grid-cols-3">
         {items.map((it, i) => (
@@ -376,7 +376,7 @@ export function Story() {
         icon={<CalendarDays size={13} />}
         title={
           <>
-            Give every task <span className="ink-gradient">a place in time.</span>
+            Give every task <span className="ink-gradient">a place in time</span>
           </>
         }
         body={<p>Drag work onto a day or week grid, nudge blocks with your keyboard, and watch the Dayline move through your schedule. Unfinished work never moves without asking you.</p>}
@@ -391,7 +391,7 @@ export function Story() {
         icon={<Repeat size={13} />}
         title={
           <>
-            Habits that <span className="ink-gradient">bloom</span>, not punish.
+            Habits that <span className="ink-gradient">bloom</span>, not punish
           </>
         }
         body={<p>Daily or chosen weekdays. Pause when life happens: paused and unscheduled days never break a streak. Every day you show up leaves a mark.</p>}
@@ -405,7 +405,7 @@ export function Story() {
         icon={<Target size={13} />}
         title={
           <>
-            Progress you <span className="ink-gradient">actually earned.</span>
+            Progress you <span className="ink-gradient">actually earned</span>
           </>
         }
         body={<p>Link tasks to a project or goal and progress fills from finished work — never a number you type in.</p>}
@@ -421,7 +421,7 @@ export function Story() {
         icon={<ChartColumn size={13} />}
         title={
           <>
-            Honest trends, <span className="ink-gradient">drawn from your days.</span>
+            Honest trends, <span className="ink-gradient">drawn from your days</span>
           </>
         }
         body={<p>Focus minutes, finished tasks and habit rates over 7 or 30 days — every chart states its window and how it&apos;s calculated, and uses only your records.</p>}
@@ -439,7 +439,7 @@ export function Story() {
         >
           <div aria-hidden className="spin-slow absolute -top-40 -right-40 size-96 rounded-full border-[28px] border-sticky-yellow/60" />
           <h2 id="final-title" className="relative font-[family-name:var(--font-display)] text-[40px] leading-tight tracking-[-0.04em] text-ink sm:text-[64px]">
-            <ProximityLine text="Your day is waiting." toColor="#fff7e0" />
+            <ProximityLine text="Your day is waiting" toColor="#fff7e0" />
           </h2>
           <div aria-hidden className="relative mx-auto mt-4 h-1.5 w-48 rounded-full bg-ink" />
           <p className="relative mx-auto mt-5 max-w-md text-[17px] font-semibold text-ink">Start with a blank page or explore a clearly labeled sample plan. You can remove the sample any time.</p>

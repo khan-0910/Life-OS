@@ -119,7 +119,7 @@ export function HabitsView() {
 
       {archived.length ? (
         <section className="mt-8" aria-labelledby="archived-title">
-          <h2 id="archived-title" className="mb-3 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+          <h2 id="archived-title" className="mb-3 text-[13px] font-medium text-ink-2">
             Archived
           </h2>
           <ul className="flex flex-col gap-1.5">

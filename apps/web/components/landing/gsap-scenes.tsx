@@ -118,7 +118,7 @@ export function DayClock() {
           <div>
             <Shuffle text="scroll the day →" tag="p" className="font-hand text-[26px] font-bold" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
             <SplitHeading id="dayclock-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] sm:text-[64px]">
-              One day, <em>hour by hour.</em>
+              One day, <em>hour by hour</em>
             </SplitHeading>
             <div className="mt-6 flex items-center gap-6">
               <svg aria-hidden viewBox="0 0 400 400" className="size-44 shrink-0 sm:size-56">
@@ -194,7 +194,7 @@ export function HabitGarden() {
       <div className="max-w-2xl">
         <Shuffle text="habits that grow" tag="p" className="font-hand text-[26px] font-bold text-hot" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
         <SplitHeading id="garden-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] text-ink sm:text-[60px]">
-          Check in. Watch it bloom.
+          Check in, watch it bloom
         </SplitHeading>
         <p className="mt-4 text-[17px] leading-relaxed text-ink-2">Every habit you tick grows the garden a little more. Miss a day and nothing dies — it just waits for you.</p>
       </div>
@@ -361,7 +361,7 @@ export function StickerDesk() {
         <div className="max-w-xl">
           <Shuffle text="go on, throw them" tag="p" className="font-hand text-[26px] font-bold text-hot" textAlign="left" shuffleDirection="up" duration={0.45} shuffleTimes={2} triggerOnHover />
           <SplitHeading id="desk-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] text-ink sm:text-[60px]">
-            A messy desk is allowed.
+            A messy desk is allowed
           </SplitHeading>
           <p className="mt-4 text-[17px] text-ink-2">Drag and fling the notes. Add your own, shuffle the pile, or tidy it into rows.</p>
         </div>
@@ -383,7 +383,7 @@ export function StickerDesk() {
           value={draft}
           maxLength={24}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder={notes.length >= 14 ? "Desk is full!" : "Write a note…"}
+          placeholder={notes.length >= 14 ? "Desk is full" : "Write a note…"}
           disabled={notes.length >= 14}
           className="h-11 flex-1 rounded-xl border-2 border-ink bg-panel px-3 text-[15px] text-ink placeholder:text-ink-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tomato"
         />

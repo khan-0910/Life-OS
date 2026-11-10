@@ -105,7 +105,7 @@ export function SectionTitle({ children, action, id, hint }: { children: ReactNo
   return (
     <div className="mb-3 flex items-center justify-between gap-3">
       <div className="min-w-0">
-        <h2 id={id} className="text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+        <h2 id={id} className="text-[13px] font-medium text-ink-2">
           {children}
         </h2>
         {hint ? <p className="mt-0.5 text-xs text-ink-3">{hint}</p> : null}

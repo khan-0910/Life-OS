@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { HardDrive, Sparkles, WifiOff } from "lucide-react";
+import { HardDrive, UserX, WifiOff } from "lucide-react";
 import { AmbientField } from "../ambient";
 import { EnterLink, useReturning } from "./enter-link";
 import { NightTemplates, ScrollProgress, TemplateMarquee, Whiteboard } from "./board";
@@ -117,17 +117,12 @@ export function Landing() {
           <HeroDots />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pt-14 pb-20 sm:px-8 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:pb-28">
             <div>
-              <motion.p
-                className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-sticky-yellow px-3 py-1 text-[13px] font-semibold text-ink"
-                initial={{ opacity: 0, y: 12, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, ease: EASE }}
-              >
-                <Sparkles size={14} className="text-hot" aria-hidden /> A living daybook for your whole life
+              <motion.p className="text-[15px] font-medium text-ink-2" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE }}>
+                A private daybook for tasks, habits, goals and focus
               </motion.p>
               <h1 id="hero-title" className="mt-6 font-[family-name:var(--font-display)] text-[56px] leading-[0.95] font-black tracking-[-0.05em] text-ink sm:text-[80px] lg:text-[96px]">
                 <KineticLine words={["Your", "days,"]} delay={0.15} className="block" />
-                <KineticLine words={["in", "full", "bloom."]} delay={0.4} className="hot-text block" wave scribble />
+                <KineticLine words={["in", "full", "bloom"]} delay={0.4} className="hot-text block" wave scribble />
               </h1>
               <motion.div className="mt-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.6 }}>
                 <RotatingPhrase />
@@ -144,13 +139,13 @@ export function Landing() {
                 </a>
               </motion.div>
               <motion.p className="mt-4 text-[13px] text-ink-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }}>
-                {returning ? "Welcome back — your planner is right where you left it." : "First visit? You'll choose a blank start or a labeled sample plan."}
+                {returning ? "Your planner is right where you left it." : "First visit? You'll choose a blank start or a labeled sample plan."}
               </motion.p>
               <motion.ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[13px] font-medium text-ink-2" initial="off" animate="on" variants={{ on: { transition: { staggerChildren: 0.08, delayChildren: 1.4 } } }}>
                 {[
                   [<HardDrive key="a" size={14} />, "Private by default"],
                   [<WifiOff key="b" size={14} />, "Works offline"],
-                  [<Sparkles key="c" size={14} />, "No account needed"],
+                  [<UserX key="c" size={14} />, "No account needed"],
                 ].map(([icon, text]) => (
                   <motion.li key={text as string} className="inline-flex items-center gap-1.5" variants={{ off: { opacity: 0, y: 8 }, on: { opacity: 1, y: 0 } }}>
                     <span className="text-hot">{icon}</span> {text}

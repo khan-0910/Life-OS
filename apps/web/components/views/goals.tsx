@@ -42,7 +42,7 @@ export function GoalsView() {
       />
 
       <section aria-labelledby="goals-title">
-        <h2 id="goals-title" className="mb-3 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+        <h2 id="goals-title" className="mb-3 text-[13px] font-medium text-ink-2">
           Goals
         </h2>
         {goals.length ? (
@@ -84,7 +84,7 @@ export function GoalsView() {
       </section>
 
       <section aria-labelledby="projects-title" className="mt-10">
-        <h2 id="projects-title" className="mb-3 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+        <h2 id="projects-title" className="mb-3 text-[13px] font-medium text-ink-2">
           Projects
         </h2>
         {projects.length ? (

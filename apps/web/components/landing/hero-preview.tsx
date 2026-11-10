@@ -83,7 +83,7 @@ export function HeroPreview() {
         {/* Schedule (back) */}
         <Layer sx={sx} sy={sy} depth={0.4} className="top-[4%] left-0 w-[46%]" from={{ x: -80, rotate: -6 }} delay={0.15} float="-1s">
           <div className={cx(card, "p-3")}>
-            <p className="mb-2 text-[11px] font-semibold tracking-wide text-ink-3 uppercase">Schedule</p>
+            <p className="mb-2 text-[11px] font-semibold text-ink-3">Schedule</p>
             <div className="relative h-44">
               {[9, 10, 11, 12, 1].map((h, i) => (
                 <div key={h} className="absolute inset-x-0 flex items-center gap-2 text-[10px] text-ink-3" style={{ top: i * 36 }}>
@@ -120,7 +120,7 @@ export function HeroPreview() {
           <div className={cx(card, "p-4")}>
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[11px] text-ink-3">Good morning</p>
+                <p className="text-[11px] text-ink-3">Today</p>
                 <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-ink">Thursday, May 14</p>
               </div>
               <MiniRing value={checked ? 0.67 : 0.33} label={checked ? "2/3" : "1/3"} />
@@ -193,7 +193,7 @@ export function HeroPreview() {
           <div className={cx(card, "flex items-center gap-3 p-3")}>
             <FocusRing />
             <div>
-              <p className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wide text-violet uppercase">
+              <p className="inline-flex items-center gap-1 text-[10px] font-semibold text-violet">
                 <Timer size={10} /> Focus · round 2
               </p>
               <p className="font-mono text-2xl font-medium text-ink tabular">18:24</p>
@@ -205,7 +205,7 @@ export function HeroPreview() {
         {/* Progress chip (front left) */}
         <Layer sx={sx} sy={sy} depth={1.4} className="bottom-[10%] left-[2%] w-[34%]" from={{ scale: 0.5, y: 30 }} delay={0.95} float="-4s">
           <div className={cx(card, "p-3")}>
-            <p className="text-[10px] font-semibold tracking-wide text-ink-3 uppercase">Goal · Half marathon</p>
+            <p className="text-[10px] font-semibold text-ink-3">Goal · Half marathon</p>
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/[0.07]">
               <motion.div className="h-full rounded-full dayline-fill" initial={{ width: "0%" }} animate={{ width: "58%" }} transition={{ duration: 1.4, delay: 1.4, ease: EASE }} />
             </div>

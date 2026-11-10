@@ -20,7 +20,7 @@ export function HeroDots() {
 export function TodayBoard() {
   return (
     <div className="mt-8 inline-flex flex-col gap-2 rounded-2xl border-2 border-ink bg-ink p-3 shadow-[6px_6px_0_0_#ff5a36]">
-      <p className="flex items-center justify-between gap-6 px-1 font-mono text-[11px] font-bold tracking-[0.2em] text-sticky-yellow uppercase">
+      <p className="flex items-center justify-between gap-6 px-1 font-mono text-[11px] font-bold tracking-[0.2em] text-sticky-yellow">
         <span>Next up</span>
         <span className="text-canvas/60">example board</span>
       </p>
@@ -71,7 +71,7 @@ export function LoopStack() {
     <section aria-labelledby="loop-title" className="relative mx-auto max-w-4xl px-5 pt-24 sm:px-8">
       <p className="font-hand text-[26px] font-bold text-hot">the daily loop</p>
       <h2 id="loop-title" className="mt-1 font-[family-name:var(--font-display)] text-[44px] leading-[0.95] font-black tracking-[-0.04em] text-ink sm:text-[60px]">
-        Four moves. Every day.
+        Four moves, every day
       </h2>
       <ScrollStack useWindowScroll smoothScroll={false} itemDistance={120} itemStackDistance={28} stackPosition="18%" baseScale={0.86} itemScale={0.035} rotationAmount={1.5} dimAmount={0.12}>
         {STEPS.map(({ n, icon: Icon, title, body, bg }) => (

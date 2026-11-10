@@ -9,7 +9,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, Grid3x3, Plus, Route, Sparkles, Target, Trash2, Wand2 } from "lucide-react";
+import { ArrowLeft, Check, ChartPie, Grid3x3, KeyRound, LayoutTemplate, Plus, Route, Target, Trash2 } from "lucide-react";
 import { createTask, saveGoal, saveProject } from "@/lib/actions";
 import { fxBurst } from "@/lib/fx";
 import { toast } from "../toast";
@@ -19,9 +19,9 @@ type TemplateId = "smart" | "okr" | "mandala" | "wheel" | "roadmap";
 
 const TEMPLATES: { id: TemplateId; title: string; blurb: string; color: string; icon: ReactNode; makes: string }[] = [
   { id: "smart", title: "SMART goal", blurb: "Sharpen one goal until it's specific, measurable and dated.", color: "bg-sticky-pink", icon: <Target size={18} />, makes: "1 goal" },
-  { id: "okr", title: "OKR", blurb: "An objective plus 2–5 measurable key results.", color: "bg-sticky-yellow", icon: <Sparkles size={18} />, makes: "1 goal + tasks" },
+  { id: "okr", title: "OKR", blurb: "An objective plus 2–5 measurable key results.", color: "bg-sticky-yellow", icon: <KeyRound size={18} />, makes: "1 goal + tasks" },
   { id: "mandala", title: "Mandala chart", blurb: "A core goal surrounded by eight supporting areas.", color: "bg-sticky-green", icon: <Grid3x3 size={18} />, makes: "1 goal + projects" },
-  { id: "wheel", title: "Wheel of life", blurb: "Rate eight life areas, then grow the weakest one.", color: "bg-sticky-blue", icon: <Wand2 size={18} />, makes: "1 goal" },
+  { id: "wheel", title: "Wheel of life", blurb: "Rate eight life areas, then grow the weakest one.", color: "bg-sticky-blue", icon: <ChartPie size={18} />, makes: "1 goal" },
   { id: "roadmap", title: "Goal roadmap", blurb: "Lay dated milestones on a timeline.", color: "bg-sticky-lime", icon: <Route size={18} />, makes: "1 goal + dated tasks" },
 ];
 
@@ -128,11 +128,11 @@ function StudioHero() {
           />
         ))}
       </div>
-      <p className="relative inline-flex items-center gap-2 rounded-full border border-sticky-yellow/50 px-3 py-1 text-[12px] font-bold tracking-wide text-sticky-yellow uppercase">
-        <Sparkles size={14} aria-hidden /> Goal Studio
+      <p className="relative inline-flex items-center gap-2 rounded-full border border-sticky-yellow/50 px-3 py-1 text-[12px] font-bold text-sticky-yellow">
+        <LayoutTemplate size={14} aria-hidden /> Goal Studio
       </p>
       <h1 id="studio-title" className="relative mt-4 max-w-2xl font-[family-name:var(--font-display)] text-[40px] leading-[0.98] font-black tracking-[-0.045em] sm:text-[60px]">
-        Shape a goal. <span className="vivid-text">Ship the plan.</span>
+        Shape a goal, <span className="vivid-text">ship the plan</span>
       </h1>
       <p className="relative mt-4 max-w-xl text-[16px] text-white/80">Pick a framework, fill in the canvas, and LifeOS creates the real goal, projects and tasks for you.</p>
     </motion.section>
@@ -174,7 +174,7 @@ function CreateBar({ disabled, hint, onCreate, label }: { disabled: boolean; hin
     <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
       <p className="text-[13px] text-ink-3">{hint}</p>
       <Button ref={ref} variant="primary" size="lg" disabled={disabled} onClick={() => ref.current && onCreate(ref.current)}>
-        <Sparkles size={16} aria-hidden /> {label}
+        <Check size={16} aria-hidden /> {label}
       </Button>
     </div>
   );
@@ -320,7 +320,7 @@ function MandalaEditor() {
           if (cell === 4) {
             return (
               <motion.div key="core" className="sticky relative flex aspect-square flex-col justify-center rounded-xl bg-night p-2.5 sm:p-4" animate={core.trim() && !reduce ? { scale: [1, 1.06, 1] } : undefined} transition={{ duration: 0.4 }}>
-                <label htmlFor="mandala-core" className="mb-1 text-[10px] font-black tracking-widest text-sticky-yellow uppercase sm:text-[11px]">
+                <label htmlFor="mandala-core" className="mb-1 text-[10px] font-semibold text-sticky-yellow sm:text-[11px]">
                   Core goal
                 </label>
                 <textarea
@@ -346,7 +346,7 @@ function MandalaEditor() {
               transition={{ type: "spring", stiffness: 220, damping: 15, delay: 0.1 + i * 0.05 }}
               className={cx("sticky relative flex aspect-square flex-col rounded-xl p-2.5 transition-[filter] sm:p-4", AREA_COLORS[i], !val.trim() && "saturate-[0.55]")}
             >
-              <label htmlFor={`mandala-${i}`} className="mb-1 text-[10px] font-black tracking-widest text-night/60 uppercase sm:text-[11px]">
+              <label htmlFor={`mandala-${i}`} className="mb-1 text-[10px] font-semibold text-night/60 sm:text-[11px]">
                 Area {i + 1}
               </label>
               <textarea

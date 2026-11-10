@@ -341,7 +341,7 @@ function TimeGrid({
       <div className="flex border-b border-line pl-14">
         {dates.map((d) => (
           <div key={d} className="flex-1 border-l border-line px-2 py-2.5 text-center first:border-l-0">
-            <div className={cx("text-[11px] tracking-wide uppercase", d === today ? "text-sage" : "text-ink-3")}>{formatWeekday(d)}</div>
+            <div className={cx("text-[11px]", d === today ? "text-sage" : "text-ink-3")}>{formatWeekday(d)}</div>
             <div className={cx("mx-auto mt-0.5 grid size-7 place-items-center rounded-full text-sm font-medium tabular", d === today ? "bg-sage text-sage-ink" : "text-ink")}>{formatDayNumber(d)}</div>
           </div>
         ))}
@@ -503,7 +503,7 @@ function UnscheduledPanel({ date, tz }: { date: ISODate; tz: string }) {
 
   return (
     <Card aria-labelledby="unsched-title" className="h-fit">
-      <h2 id="unsched-title" className="mb-1 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+      <h2 id="unsched-title" className="mb-1 text-[13px] font-medium text-ink-2">
         Not yet scheduled
       </h2>
       <p className="mb-3 text-xs text-ink-3">Planned for or due on this day, with no time block.</p>

@@ -225,7 +225,7 @@ function ActiveRun({ run }: { run: FocusRun }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={motionT.ui}
-              className={cx("text-sm font-medium tracking-wide uppercase", phase.text)}
+              className={cx("text-sm font-medium", phase.text)}
             >
               {phase.label}
               {paused ? " · paused" : ""}

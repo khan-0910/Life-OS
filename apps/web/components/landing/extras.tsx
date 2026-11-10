@@ -20,7 +20,7 @@ import {
   useVelocity,
   type MotionValue,
 } from "motion/react";
-import { CalendarDays, ChartColumn, Repeat, Sparkles, Target, Timer } from "lucide-react";
+import { CalendarDays, ChartColumn, Flower2, LayoutTemplate, Repeat, Target, Timer } from "lucide-react";
 import { cx } from "../ui";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -50,7 +50,7 @@ export function RollingBadge({ text = "plan · bloom · focus · repeat · ", cl
       </motion.svg>
       <div className="absolute inset-0 grid place-items-center">
         <span className="wobble grid size-14 place-items-center rounded-full border-[3px] border-ink bg-tomato text-canvas" style={{ ["--r" as string]: "-8deg" }}>
-          <Sparkles size={24} strokeWidth={2.5} />
+          <Flower2 size={24} strokeWidth={2.5} />
         </span>
       </div>
     </div>
@@ -213,7 +213,7 @@ const ROLL = [
   { n: "03", title: "Goals with real progress", body: "Progress comes only from linked tasks — never a slider you drag.", tone: "bg-sticky-pink", icon: <Target size={28} /> },
   { n: "04", title: "Focus in a quieter room", body: "A timer that survives reloads, with optional site blocking.", tone: "bg-sticky-blue", icon: <Timer size={28} /> },
   { n: "05", title: "Insights from real records", body: "7 and 30-day trends with stated definitions.", tone: "bg-sticky-orange", icon: <ChartColumn size={28} /> },
-  { n: "06", title: "Templates that become plans", body: "SMART, OKR, mandala, wheel of life and roadmaps in the Goal Studio.", tone: "bg-sticky-lime", icon: <Sparkles size={28} /> },
+  { n: "06", title: "Templates that become plans", body: "SMART, OKR, mandala, wheel of life and roadmaps in the Goal Studio.", tone: "bg-sticky-lime", icon: <LayoutTemplate size={28} /> },
 ];
 
 function RollCard({ c, i, progress }: { c: (typeof ROLL)[number]; i: number; progress: MotionValue<number> }) {
@@ -334,7 +334,7 @@ export function OdometerStrip() {
     <section aria-labelledby="odo-title" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <h2 id="odo-title" className="font-[family-name:var(--font-display)] text-[40px] leading-none font-black tracking-[-0.04em] text-ink sm:text-[60px]">
-          A month, <span className="hot-text">rolled up.</span>
+          A month, <span className="hot-text">rolled up</span>
         </h2>
         <span className="font-hand rotate-[-4deg] text-[26px] text-ink-2">← an example month, not real data</span>
       </div>

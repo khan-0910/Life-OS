@@ -123,7 +123,7 @@ export function InsightsView() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <Card aria-labelledby="focus-chart">
-          <h2 id="focus-chart" className="mb-4 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+          <h2 id="focus-chart" className="mb-4 text-[13px] font-medium text-ink-2">
             Focus minutes per day
           </h2>
           {totals.sessions ? <Bars key={range} values={focus} color="#f2b75a" fill="#ffe9a6" unit="min" label="Focus minutes per day" /> : <EmptyState title="No focus sessions in this window">Sessions you complete, end or interrupt appear here.</EmptyState>}
@@ -131,7 +131,7 @@ export function InsightsView() {
         </Card>
 
         <Card aria-labelledby="tasks-chart">
-          <h2 id="tasks-chart" className="mb-4 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+          <h2 id="tasks-chart" className="mb-4 text-[13px] font-medium text-ink-2">
             Tasks completed per day
           </h2>
           {completedTotal ? <Bars key={range} values={completed} color="#6fd0a2" fill="#c8f0dc" unit="tasks" label="Tasks completed per day" /> : <EmptyState title="No tasks completed in this window" />}
@@ -139,7 +139,7 @@ export function InsightsView() {
         </Card>
 
         <Card aria-labelledby="habit-rates" className="lg:col-span-2">
-          <h2 id="habit-rates" className="mb-4 text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+          <h2 id="habit-rates" className="mb-4 text-[13px] font-medium text-ink-2">
             Habit completion
           </h2>
           {habits.length ? (

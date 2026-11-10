@@ -77,13 +77,6 @@ export function formatDuration(ms: number): string {
   return m ? `${h}h ${m}m` : `${h}h`;
 }
 
-export function greeting(minutes: number): string {
-  if (minutes < 5 * 60) return "Still up";
-  if (minutes < 12 * 60) return "Good morning";
-  if (minutes < 17 * 60) return "Good afternoon";
-  return "Good evening";
-}
-
 export function pct(ratio: number | null): string {
   return ratio === null ? "—" : `${Math.round(ratio * 100)}%`;
 }

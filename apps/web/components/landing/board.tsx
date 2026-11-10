@@ -20,7 +20,7 @@ import {
   useVelocity,
   type MotionValue,
 } from "motion/react";
-import { ArrowRight, Grid3x3, MousePointer2, Route, Sparkles, Target, Waypoints } from "lucide-react";
+import { ArrowRight, ChartPie, Crosshair, Grid3x3, LayoutTemplate, MousePointer2, Route, Target, Waypoints } from "lucide-react";
 import { cx } from "../ui";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -55,7 +55,7 @@ export function TemplateMarquee() {
         {[...WORDS, ...WORDS].map((w, i) => (
           <span key={i} className={cx("inline-flex items-center gap-10 font-[family-name:var(--font-display)] text-[48px] leading-none font-black tracking-[-0.04em] sm:text-[84px]", outline ? "text-outline text-ink" : "hot-text")}>
             {w}
-            <Sparkles aria-hidden className={cx("size-8 sm:size-12", i % 2 ? "text-hot" : "text-electric")} strokeWidth={2.5} />
+            <span aria-hidden className={cx("inline-block size-4 shrink-0 rounded-full bg-current sm:size-6", i % 2 ? "text-hot" : "text-electric")} />
           </span>
         ))}
       </motion.div>
@@ -160,13 +160,13 @@ export function Whiteboard() {
   return (
     <section ref={section} id="board" aria-labelledby="board-title" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 pt-24 pb-16 sm:px-8">
       <motion.div className="mx-auto max-w-2xl text-center" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 0.7, ease: EASE }}>
-        <p className="inline-flex items-center gap-2 rounded-full bg-night px-3 py-1 text-[12px] font-bold tracking-wide text-sticky-yellow uppercase">
+        <p className="inline-flex items-center gap-2 rounded-full bg-night px-3 py-1 text-[12px] font-bold text-sticky-yellow">
           <Waypoints size={14} aria-hidden /> Goal board
         </p>
         <h2 id="board-title" className="mt-4 font-[family-name:var(--font-display)] text-[40px] leading-[1.02] font-black tracking-[-0.04em] text-ink sm:text-[64px]">
-          Think on a board.
+          Think on a board,
           <br />
-          <span className="hot-text">Act in a planner.</span>
+          <span className="hot-text">act in a planner</span>
         </h2>
         <p className="mt-4 text-[17px] text-ink-2">Break a big goal into sticky-note steps, then turn them into real tasks with one click in the Goal Studio. Go on — drag the notes.</p>
       </motion.div>
@@ -204,7 +204,7 @@ export function Whiteboard() {
                   )}
                 >
                   {n.big ? (
-                    <span className="mb-2 flex items-center gap-1 text-[11px] font-black tracking-widest uppercase opacity-70">
+                    <span className="mb-2 flex items-center gap-1 text-[11px] font-semibold opacity-70">
                       <Target size={12} aria-hidden /> Goal
                     </span>
                   ) : null}
@@ -388,9 +388,9 @@ type TemplateCard = { id: string; title: string; blurb: string; icon: ReactNode;
 
 const CARDS: TemplateCard[] = [
   { id: "mandala", title: "Mandala chart", blurb: "One core goal, eight supporting areas, sixty-four actions.", icon: <Grid3x3 size={16} />, span: "md:col-span-2 md:row-span-2", preview: (on) => <MandalaPreview on={on} /> },
-  { id: "wheel", title: "Wheel of life", blurb: "Rate eight life areas and see where to grow.", icon: <Sparkles size={16} />, span: "md:col-span-2", preview: (on) => <WheelPreview on={on} /> },
+  { id: "wheel", title: "Wheel of life", blurb: "Rate eight life areas and see where to grow.", icon: <ChartPie size={16} />, span: "md:col-span-2", preview: (on) => <WheelPreview on={on} /> },
   { id: "okr", title: "OKR", blurb: "An objective with measurable key results.", icon: <Target size={16} />, span: "md:col-span-2", preview: (on) => <OkrPreview on={on} /> },
-  { id: "smart", title: "SMART goal", blurb: "Specific, measurable, achievable, relevant, time-bound.", icon: <Sparkles size={16} />, span: "md:col-span-2", preview: (on) => <SmartPreview on={on} /> },
+  { id: "smart", title: "SMART goal", blurb: "Specific, measurable, achievable, relevant, time-bound.", icon: <Crosshair size={16} />, span: "md:col-span-2", preview: (on) => <SmartPreview on={on} /> },
   { id: "roadmap", title: "Goal roadmap", blurb: "Milestones on a timeline, each with a date.", icon: <Route size={16} />, span: "md:col-span-2", preview: (on) => <RoadmapPreview on={on} /> },
 ];
 
@@ -451,13 +451,13 @@ export function NightTemplates() {
       <div aria-hidden className="aurora pointer-events-none absolute -top-1/2 left-1/2 size-[1100px] -translate-x-1/2 rounded-full opacity-30 [mask-image:radial-gradient(circle,black,transparent_62%)]" />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 0.8, ease: EASE }} className="max-w-3xl">
-          <p className="inline-flex items-center gap-2 rounded-full border border-sticky-yellow/50 px-3 py-1 text-[12px] font-bold tracking-wide text-sticky-yellow uppercase">
-            <Sparkles size={14} aria-hidden /> Goal Studio · 5 templates
+          <p className="inline-flex items-center gap-2 rounded-full border border-sticky-yellow/50 px-3 py-1 text-[12px] font-bold text-sticky-yellow">
+            <LayoutTemplate size={14} aria-hidden /> Goal Studio · 5 templates
           </p>
           <h2 id="templates-title" className="mt-5 font-[family-name:var(--font-display)] text-[44px] leading-[0.98] font-black tracking-[-0.045em] sm:text-[76px]">
-            Pick a frame.
+            Pick a frame,
             <br />
-            <span className="vivid-text">Watch it come alive.</span>
+            <span className="vivid-text">watch it come alive</span>
           </h2>
           <p className="mt-5 max-w-xl text-[17px] text-white/80">Classic goal-setting frameworks, rebuilt as interactive canvases. Fill one in and LifeOS turns it into a real goal with linked tasks.</p>
         </motion.div>

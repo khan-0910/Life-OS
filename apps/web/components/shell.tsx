@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MotionConfig, motion } from "motion/react";
-import { CalendarDays, ChartColumn, HardDrive, Plus, Repeat, Settings, Sparkles, Sun, Target, Timer, TriangleAlert, WifiOff } from "lucide-react";
+import { CalendarDays, ChartColumn, HardDrive, Plus, Repeat, LayoutTemplate, Settings, Sun, Target, Timer, TriangleAlert, WifiOff } from "lucide-react";
 import { blockingDesired, blockingUntil, remainingMs } from "@lifeos/domain";
 import { reconcileFocus } from "@/lib/actions";
 import { spring } from "@/lib/motion";
@@ -22,7 +22,7 @@ const NAV = [
   { href: "/plan", label: "Plan", icon: CalendarDays },
   { href: "/habits", label: "Habits", icon: Repeat },
   { href: "/goals", label: "Goals", icon: Target },
-  { href: "/studio", label: "Studio", icon: Sparkles },
+  { href: "/studio", label: "Studio", icon: LayoutTemplate },
   { href: "/focus", label: "Focus", icon: Timer },
   { href: "/insights", label: "Insights", icon: ChartColumn },
   { href: "/settings", label: "Settings", icon: Settings },

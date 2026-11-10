@@ -4,7 +4,7 @@ import Counter from "@/components/bits/Counter";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, CalendarPlus, ClipboardCheck, Repeat, Sparkles, Target, Timer } from "lucide-react";
+import { ArrowRight, CalendarPlus, ClipboardCheck, Eye, Repeat, Target, Timer } from "lucide-react";
 import {
   blocksOnDate,
   completedOn,
@@ -20,7 +20,7 @@ import {
 } from "@lifeos/domain";
 import { setHabitDone } from "@/lib/actions";
 import { fxTrail } from "@/lib/fx";
-import { formatDateLong, formatDuration, formatTime, greeting } from "@/lib/format";
+import { formatDateLong, formatDuration, formatTime } from "@/lib/format";
 import { useToday } from "@/lib/hooks";
 import { loadSampleData } from "@/lib/seed";
 import { isFirstArrival, reveal, revealGroup, t as motionT, useBump, useHeldCompletions, useMarkArrived } from "@/lib/motion";
@@ -34,7 +34,7 @@ import { HABIT_TONE, scheduleLabel } from "./habits";
 
 export function TodayView() {
   const data = useData();
-  const { today, minutes, now, tz } = useToday();
+  const { today, now, tz } = useToday();
   const [editing, setEditing] = useState<Task | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [reviewOpen, setReviewOpen] = useState(false);
@@ -95,8 +95,8 @@ export function TodayView() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm text-ink-3">
-              {greeting(minutes)}
-              {data.settings.displayName ? `, ${data.settings.displayName}` : ""}
+              {/* The page names its context instead of greeting (unslop): "Today", or "Sam's day" with a display name. */}
+              {data.settings.displayName ? `${data.settings.displayName}'s day` : "Today"}
             </p>
             <h1 className="mt-0.5 font-[family-name:var(--font-display)] text-[32px] leading-tight font-black tracking-[-0.03em] sm:text-[40px]">{formatDateLong(today)}</h1>
           </div>
@@ -121,7 +121,7 @@ export function TodayView() {
 
         <Card lift className="relative overflow-hidden" aria-labelledby="next-title">
           <div aria-hidden className="ambient-breathe pointer-events-none absolute -top-20 -right-16 size-56 rounded-full bg-[radial-gradient(circle,#ffd3de,transparent_65%)]" />
-          <h2 id="next-title" className="text-[13px] font-medium tracking-wide text-ink-2 uppercase">
+          <h2 id="next-title" className="text-[13px] font-medium text-ink-2">
             Next action
           </h2>
           <AnimatePresence mode="wait" initial={false}>
@@ -340,9 +340,9 @@ function NextAction({ title, detail, href, cta }: { title: string; detail: strin
 function FirstRun() {
   return (
     <div className="mx-auto max-w-2xl py-6 sm:py-12">
-      <p className="text-sm text-sage">Welcome to LifeOS</p>
+      <p className="text-sm text-sage">Today</p>
       <h1 className="mt-2 font-[family-name:var(--font-display)] text-[40px] leading-tight font-black tracking-[-0.03em]">
-        Your daybook is <span className="ink-gradient">ready.</span>
+        Your daybook is <span className="ink-gradient">ready</span>
       </h1>
       <p className="mt-3 text-[15px] text-ink-2">
         Your Today screen fills in as you add tasks, time blocks and habits. You&apos;re in <strong className="font-medium text-ink">Local mode</strong>: everything stays in this browser, nothing is uploaded.
@@ -354,7 +354,7 @@ function FirstRun() {
       </div>
       <div className="mt-8 rounded-2xl border border-line p-5">
         <p className="flex items-center gap-2 text-sm font-medium">
-          <Sparkles size={15} className="text-violet" aria-hidden /> Want to look around first?
+          <Eye size={16} className="text-ink-3" aria-hidden /> Want to look around first?
         </p>
         <p className="mt-1 text-[13px] text-ink-3">Load a small, clearly labeled sample plan. You can remove all of it later from Settings → Data.</p>
         <Button className="mt-4" onClick={loadSampleData}>
