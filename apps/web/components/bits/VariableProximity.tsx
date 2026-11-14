@@ -340,6 +340,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     };
 
     const handleMove = (x: number, y: number) => {
+      if (!near) return;
       pointer.x = x;
       pointer.y = y;
       pointer.active = true;
@@ -361,7 +362,14 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleLeave);
     window.addEventListener('touchcancel', handleLeave);
-    window.addEventListener('scroll', schedule, { capture: true, passive: true });
+    // LifeOS: skip pointer and scroll work while the text is far off screen (it would otherwise measure on every move).
+    let near = true;
+    const nearObserver = rootRef.current && 'IntersectionObserver' in window ? new IntersectionObserver(([entry]) => (near = Boolean(entry?.isIntersecting)), { rootMargin: '200px' }) : null;
+    if (rootRef.current) nearObserver?.observe(rootRef.current);
+    const onScroll = () => {
+      if (near) schedule();
+    };
+    window.addEventListener('scroll', onScroll, { capture: true, passive: true });
     window.addEventListener('resize', relayout);
     root.addEventListener('mouseleave', handleLeave);
 
@@ -380,11 +388,12 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     return () => {
       cancelAnimationFrame(frame);
       observer?.disconnect();
+      nearObserver?.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleLeave);
       window.removeEventListener('touchcancel', handleLeave);
-      window.removeEventListener('scroll', schedule, { capture: true });
+      window.removeEventListener('scroll', onScroll, { capture: true });
       window.removeEventListener('resize', relayout);
       root.removeEventListener('mouseleave', handleLeave);
     };

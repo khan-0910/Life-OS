@@ -154,8 +154,8 @@ body::after {
   z-index: 90;
   pointer-events: none;
   background-image: var(--grain);
-  opacity: 0.22;
-  mix-blend-mode: multiply;
+  /* Plain alpha, no blend mode: multiply on a full-screen top layer re-blends the whole viewport every scroll frame. */
+  opacity: 0.2;
 }
 
 /* Display type: Fraunces with its soft, wonky axes turned up. */
@@ -470,7 +470,8 @@ html[data-hidden] .hot-text {
   0%, 100% { font-variation-settings: "wght" 900, "SOFT" 100, "WONK" 1; }
   50% { font-variation-settings: "wght" 300, "SOFT" 0, "WONK" 0; }
 }
-.wght-wave { animation: wght-wave 3.2s ease-in-out infinite; }
+/* Two waves, then rest: font-variation-settings re-shapes text (layout + paint) on every frame it animates. */
+.wght-wave { animation: wght-wave 3.2s ease-in-out 2; }
 
 /* Scroll-linked reveal for any block (progressive enhancement; static where unsupported). */
 @supports (animation-timeline: view()) {

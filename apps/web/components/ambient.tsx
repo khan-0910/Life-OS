@@ -21,10 +21,10 @@ export function AmbientField({ mood = "day", className }: { mood?: AmbientMood; 
   const blob = (color: string) => `radial-gradient(circle at center, ${color} 0%, ${color}00 68%)`;
   return (
     <div aria-hidden className={cx("pointer-events-none fixed inset-0 -z-10 overflow-hidden", className)}>
-      <div className="ambient-blob drift-a transition-[background] duration-1000" style={{ width: "62vmax", height: "62vmax", left: "-18vmax", top: "-22vmax", background: blob(a), opacity: 0.75 }} />
-      <div className="ambient-blob drift-b transition-[background] duration-1000" style={{ width: "58vmax", height: "58vmax", right: "-20vmax", top: "-8vmax", background: blob(b), opacity: 0.8 }} />
-      <div className="ambient-blob drift-c transition-[background] duration-1000" style={{ width: "54vmax", height: "54vmax", left: "18vw", bottom: "-30vmax", background: blob(c), opacity: 0.7 }} />
-      <div className="ambient-blob drift-b transition-[background] duration-1000" style={{ width: "36vmax", height: "36vmax", right: "8vw", bottom: "-6vmax", background: blob(d), opacity: 0.55, animationDelay: "-12s" }} />
+      <div className="ambient-blob transition-[background] duration-1000" style={{ width: "62vmax", height: "62vmax", left: "-18vmax", top: "-22vmax", background: blob(a), opacity: 0.75 }} />
+      <div className="ambient-blob transition-[background] duration-1000" style={{ width: "58vmax", height: "58vmax", right: "-20vmax", top: "-8vmax", background: blob(b), opacity: 0.8 }} />
+      <div className="ambient-blob transition-[background] duration-1000" style={{ width: "54vmax", height: "54vmax", left: "18vw", bottom: "-30vmax", background: blob(c), opacity: 0.7 }} />
+      <div className="ambient-blob transition-[background] duration-1000" style={{ width: "36vmax", height: "36vmax", right: "8vw", bottom: "-6vmax", background: blob(d), opacity: 0.55, animationDelay: "-12s" }} />
     </div>
   );
 }

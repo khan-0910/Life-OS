@@ -30,15 +30,17 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function RollingBadge({ text = "plan · bloom · focus · repeat · ", className }: { text?: string; className?: string }) {
   const reduce = useReducedMotion() ?? false;
   const rot = useMotionValue(0);
+  const box = useRef<HTMLDivElement>(null);
+  const onScreen = useInView(box);
   const { scrollY } = useScroll();
   const vel = useVelocity(scrollY);
   useAnimationFrame((_, delta) => {
-    if (reduce) return;
+    if (reduce || !onScreen) return;
     // Base spin plus a kick from scroll speed (either direction).
     rot.set(rot.get() + (delta / 1000) * (18 + Math.min(Math.abs(vel.get()) * 0.08, 240)));
   });
   return (
-    <div aria-hidden className={cx("relative size-36 sm:size-40", className)}>
+    <div ref={box} aria-hidden className={cx("relative size-36 sm:size-40", className)}>
       <motion.svg viewBox="0 0 200 200" className="size-full" style={{ rotate: rot }}>
         <defs>
           <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />

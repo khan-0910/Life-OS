@@ -114,14 +114,22 @@ function Connector({ from, to, size, drawn, i }: { from: { n: Note; x: MotionVal
   );
 }
 
+/**
+ * A full-board layer translated by percentages of the board (transform, not left/top, so no layout per
+ * frame), with the cursor at its top-left corner. Loops only while the board is near the viewport.
+ */
 function GhostCursor({ label, color, path, delay }: { label: string; color: string; path: { x: string[]; y: string[] }; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const near = useInView(ref, { margin: "200px" });
+  const frames = path.x.map((x, i) => `translate(${x}, ${path.y[i]})`);
   return (
     <motion.div
+      ref={ref}
       aria-hidden
-      className="pointer-events-none absolute top-0 left-0 z-20"
-      initial={{ left: path.x[0], top: path.y[0], opacity: 0 }}
-      animate={{ left: path.x, top: path.y, opacity: 1 }}
-      transition={{ duration: 12, delay, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", opacity: { duration: 0.4, delay } }}
+      className="pointer-events-none absolute inset-0 z-20"
+      initial={{ transform: frames[0], opacity: 0 }}
+      animate={near ? { transform: frames, opacity: 1 } : { transform: frames[0], opacity: 0 }}
+      transition={near ? { duration: 12, delay, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", opacity: { duration: 0.4, delay } } : { duration: 0.2 }}
     >
       <MousePointer2 size={22} fill={color} color="#12301f" strokeWidth={1.5} />
       <span className="ml-4 inline-block rounded-md px-2 py-0.5 text-[11px] font-bold whitespace-nowrap text-night" style={{ background: color }}>

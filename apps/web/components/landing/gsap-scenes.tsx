@@ -183,7 +183,9 @@ export function HabitGarden() {
           .from(".hg-flower", { scale: 0, rotation: -120, transformOrigin: "50% 50%", stagger: 0.35, duration: 0.8, ease: "back.out(2.4)" }, 1.4)
           .from(".hg-day", { y: 20, opacity: 0, stagger: 0.2, duration: 0.5 }, 0.6)
           .from(".hg-streak", { scale: 0, rotation: -20, transformOrigin: "50% 50%", duration: 0.6, ease: "back.out(3)" }, ">-0.2");
-        gsap.to(".hg-flower", { rotation: "+=10", yoyo: true, repeat: -1, duration: 1.8, ease: "sine.inOut", stagger: 0.2, transformOrigin: "50% 100%" });
+        // The idle sway only runs while the garden is on screen; an endless SVG tween repaints even offscreen.
+        const sway = gsap.to(".hg-flower", { rotation: "+=10", yoyo: true, repeat: -1, duration: 1.8, ease: "sine.inOut", stagger: 0.2, transformOrigin: "50% 100%", paused: true });
+        ScrollTrigger.create({ trigger: root.current, start: "top bottom", end: "bottom top", onToggle: (self) => (self.isActive ? sway.play() : sway.pause()) });
       });
     },
     { scope: root },
@@ -428,11 +430,23 @@ export function LoopMarquee() {
           },
         );
         loop.totalTime(loop.duration() * 20);
+        // Stars and the loop only tick while the band is on screen.
+        const stars = gsap.to(".lm-star", { rotation: 360, duration: 6, ease: "none", repeat: -1, paused: true });
+        loop.pause();
         let dir = 1;
         ScrollTrigger.create({
           trigger: root.current,
           start: "top bottom",
           end: "bottom top",
+          onToggle: (self) => {
+            if (self.isActive) {
+              loop.resume();
+              stars.resume();
+            } else {
+              loop.pause();
+              stars.pause();
+            }
+          },
           onUpdate: (self) => {
             if (self.direction !== dir) dir = self.direction;
             const boost = Math.min(4, 1 + Math.abs(self.getVelocity()) / 600);
@@ -440,7 +454,6 @@ export function LoopMarquee() {
             gsap.to(loop, { timeScale: dir, duration: 1.2, delay: 0.25, ease: "power2.out" });
           },
         });
-        gsap.to(".lm-star", { rotation: 360, duration: 6, ease: "none", repeat: -1 });
       });
     },
     { scope: root },
